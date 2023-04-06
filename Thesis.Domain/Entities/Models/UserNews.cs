@@ -11,7 +11,6 @@ namespace Thesis.Domain.Entities.Models
     {
         public string UserID { get; set; }
         public User User { get; set; }
-
         public int NewsID { get; set; }
         public News News { get; set; }
     }

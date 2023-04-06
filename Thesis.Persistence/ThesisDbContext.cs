@@ -23,7 +23,7 @@ namespace Thesis.Persistence
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            builder.Entity<UserNews>().HasKey(x => new { x.UserID, x.NewsID });
+            builder.Entity<UserNews>().HasKey(un => new { un.UserID, un.NewsID });
         }
     }
 }

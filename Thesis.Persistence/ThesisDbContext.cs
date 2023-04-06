@@ -19,5 +19,11 @@ namespace Thesis.Persistence
         public DbSet<News> News { get; }
         public DbSet<Department> Departments { get; }
         public DbSet<UserNews> UserNews { get; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            builder.Entity<UserNews>().HasKey(x => new { x.UserID, x.NewsID });
+        }
     }
 }

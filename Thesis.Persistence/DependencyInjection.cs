@@ -13,7 +13,8 @@ namespace Thesis.Persistence
     {
         public static IServiceCollection AddSQLDataBase(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<ThesisDbContext>(options => options.UseSqlServer("ConnectionString")); //didn't do "ConnectionString"
+            var connectionString = configuration.GetConnectionString("ConnectionString");
+            services.AddDbContext<ThesisDbContext>(options => options.UseSqlServer(connectionString)); //didn't do "ConnectionString"
 
             return services;
         }

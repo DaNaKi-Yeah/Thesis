@@ -11,8 +11,9 @@ namespace Application.Intrefaces
         where T : BaseEntity<TKey>
     {
         public Task<TKey> CreateAsync(T entity) ;
-        public Task GetAll();
-        public Task<T> GetAsyncById(T id) ;
+        public Task<List<T>> GetAll();
+        public Task<T> GetAsync(T entity);
+        public Task<T> GetAsyncById(TKey id);
         public Task UpdateAsync(T entity);
         public Task DeleteAsync(T entity);
     }

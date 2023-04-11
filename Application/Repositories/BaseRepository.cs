@@ -1,5 +1,6 @@
 ﻿using Application.Intrefaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -15,46 +16,47 @@ namespace Application.Repositories
         where T : BaseEntity<TKey>
     {
         private readonly ThesisDbContext _context;
-        public BaseRepository(ThesisDbContext context) => _context = context;
+        public BaseRepository(ThesisDbContext context)
+        {
+            _context = context;
+            if (_context.Set<T>() == default(DbSet<T>))
+            {
+                throw new ArgumentNullException(nameof(T));
+            }
+        }
         public async Task<TKey> CreateAsync(T entity)
         {
-           
-            if (entity == null)
-            {
-                throw new ArgumentNullException("Entity is null");
-            }
-            _context.Set<T>().Add(entity);
+            await _context.Set<T>().AddAsync(entity);
             await _context.SaveChangesAsync();
             return entity.Id;
         }
 
         public async Task DeleteAsync(T entity)
         {
-            if (entity == null)
-            {
-                throw new ArgumentNullException("Entity is null");
-            }
-            _context.Set<T>().ExecuteDelete();
+            _context.Set<T>().Remove(entity);
             await _context.SaveChangesAsync();
         }
-        public Task GetAll()
+        public async Task<List<T>> GetAll()
         {
-            throw new NotImplementedException();
+            return _context.Set<T>().ToList();
         }
 
-        public Task<T> GetAsync()
+        public async Task<T> GetAsync(T entity)
         {
-            throw new NotImplementedException();
+            T result =  _context.Set<T>().FirstOrDefault(entity);
+            return result;
         }
 
-        public Task<T> GetAsyncById(T id)
+        public async Task<T> GetAsyncById(TKey id)
         {
-            throw new NotImplementedException();
+            T result = _context.Set<T>().FirstOrDefault(item => item.Id.Equals(id));
+            return result;
         }
 
-        public Task UpdateAsync(T entity)
+        public async Task UpdateAsync(T entity)
         {
-            throw new NotImplementedException();
+            _context.Set<T>().Update(entity);
+            await _context.SaveChangesAsync();
         }
     }
 }

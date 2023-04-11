@@ -32,14 +32,14 @@ namespace Application.Repositories
 
         public async Task<TKey> CreateAsync(T entity)
         {
-            var result = (await _dbset.AddAsync(entity)).Entity;
+            TKey result = (await _dbset.AddAsync(entity)).Entity.Id;
             await _context.SaveChangesAsync();
-            return result.Id;
+            return result;
         }
 
         public async Task DeleteAsync(T entity)
         {
-            _dbset.remove(entity);
+            _dbset.Remove(entity);
             await _context.SaveChangesAsync();
         }
 

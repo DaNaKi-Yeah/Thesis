@@ -13,7 +13,7 @@ namespace Application.Intrefaces
         public Task<TKey> CreateAsync(T entity) ;
         public Task<List<T>> GetAllAsync();
         public Task<T> GetAsync(T entity);
-        public Task<T> GetAsyncById(TKey id);
+        public Task<T> GetByIdAsync(TKey id);
         public Task UpdateAsync(T entity);
         public Task DeleteAsync(T entity);
     }

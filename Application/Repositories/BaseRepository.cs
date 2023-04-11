@@ -48,6 +48,7 @@ namespace Application.Repositories
             return _dbset.ToList();
         }
 
+        //не пон как должно работать
         public async Task<T> GetAsync(T entity)
         {
             T result =  _dbset.FirstOrDefault(entity);

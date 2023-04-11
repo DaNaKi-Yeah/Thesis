@@ -16,6 +16,8 @@ namespace Application.Repositories
         where T : BaseEntity<TKey>
     {
         private readonly ThesisDbContext _context;
+
+
         public BaseRepository(ThesisDbContext context)
         {
             _context = context;
@@ -24,6 +26,8 @@ namespace Application.Repositories
                 throw new ArgumentNullException(nameof(T));
             }
         }
+
+
         public async Task<TKey> CreateAsync(T entity)
         {
             await _context.Set<T>().AddAsync(entity);

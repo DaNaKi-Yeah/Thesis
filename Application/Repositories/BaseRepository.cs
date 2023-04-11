@@ -45,7 +45,7 @@ namespace Application.Repositories
 
         public async Task<List<T>> GetAllAsync()
         {
-            return _dbset.ToList();
+            return await _dbset.ToListAsync();
         }
 
         //не пон как должно работать
@@ -57,8 +57,7 @@ namespace Application.Repositories
 
         public async Task<T> GetByIdAsync(TKey id)
         {
-            T result = _dbset.FirstOrDefault(item => item.Id.Equals(id));
-            return result;
+            return await _dbset.FirstOrDefaultAsync(item => item.Id.Equals(id));
         }
 
         public async Task UpdateAsync(T entity)

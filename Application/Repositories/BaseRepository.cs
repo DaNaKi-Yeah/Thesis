@@ -43,7 +43,7 @@ namespace Application.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<List<T>> GetAll()
+        public async Task<List<T>> GetAllAsync()
         {
             return _dbset.ToList();
         }

@@ -55,7 +55,7 @@ namespace Application.Repositories
             return result;
         }
 
-        public async Task<T> GetAsyncById(TKey id)
+        public async Task<T> GetByIdAsync(TKey id)
         {
             T result = _dbset.FirstOrDefault(item => item.Id.Equals(id));
             return result;

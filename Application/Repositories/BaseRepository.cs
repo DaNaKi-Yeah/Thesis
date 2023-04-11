@@ -45,7 +45,7 @@ namespace Application.Repositories
 
         public async Task<List<T>> GetAllAsync()
         {
-            return await _dbset.ToListAsync();
+            return _dbset.ToList();
         }
 
         //не пон как должно работать

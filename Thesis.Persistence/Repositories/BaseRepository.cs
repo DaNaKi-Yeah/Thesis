@@ -1,5 +1,4 @@
-﻿using Application.Intrefaces;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -9,8 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Thesis.Domain.Entities.Common;
 using Thesis.Persistence;
+using Thesis.Persistence.Intrefaces;
 
-namespace Application.Repositories
+namespace Thesis.Persistence.Repositories
 {
     public class BaseRepository<TKey,T> : IRepository<TKey,T>
         where T : BaseEntity<TKey>
@@ -48,14 +48,7 @@ namespace Application.Repositories
             return await _dbset.ToListAsync();
         }
 
-        //не пон как должно работать
-        public async Task<T> GetAsync(T entity)
-        {
-            T result =  _dbset.FirstOrDefault(entity);
-            return result;
-        }
-
-        public async Task<T> GetByIdAsync(TKey id)
+        public async Task<T?> GetByIdAsync(TKey id)
         {
             return await _dbset.FirstOrDefaultAsync(item => item.Id.Equals(id));
         }

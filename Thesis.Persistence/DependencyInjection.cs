@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Thesis.Persistence.Intrefaces;
+using Thesis.Persistence.Repositories;
 
 namespace Thesis.Persistence
 {
@@ -14,7 +16,8 @@ namespace Thesis.Persistence
         public static IServiceCollection AddSQLDataBase(this IServiceCollection services, IConfiguration configuration)
         {
             var connectionString = configuration.GetConnectionString("ConnectionString");
-            services.AddDbContext<ThesisDbContext>(options => options.UseSqlServer(connectionString));            
+            services.AddDbContext<ThesisDbContext>(options => options.UseSqlServer(connectionString));
+            services.AddTransient(typeof(IRepository<,>), typeof(BaseRepository<,>));
             return services;
         }
     }

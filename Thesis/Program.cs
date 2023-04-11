@@ -1,4 +1,5 @@
 using Thesis.Persistence;
+using Application;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddSQLDataBase(builder.Configuration);
+
+builder.Services.AddApplication(builder.Configuration);
+
 
 var app = builder.Build();
 

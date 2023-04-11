@@ -5,15 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using Thesis.Domain.Entities.Common;
 
-namespace Application.Intrefaces
+namespace Thesis.Persistence.Intrefaces
 {
     public interface IRepository<TKey,T>
         where T : BaseEntity<TKey>
     {
         public Task<TKey> CreateAsync(T entity) ;
         public Task<List<T>> GetAllAsync();
-        public Task<T> GetAsync(T entity);
-        public Task<T> GetByIdAsync(TKey id);
+        public Task<T?> GetByIdAsync(TKey id);
         public Task UpdateAsync(T entity);
         public Task DeleteAsync(T entity);
     }

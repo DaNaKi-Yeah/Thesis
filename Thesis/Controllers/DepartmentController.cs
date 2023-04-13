@@ -1,8 +1,10 @@
 ﻿using Application.Commands.AddDepartmentCommands;
+using Application.Queries.DepartmentPage;
 using Application.Queries.GetDepartment;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Transactions;
 using Thesis.Domain.Entities.Models;
 
 namespace Thesis.Controllers
@@ -30,5 +32,17 @@ namespace Thesis.Controllers
             GetAllDepartamentsQuery query = new GetAllDepartamentsQuery();
            return (await _mediator.Send(query)).ToList();
         }
+        [HttpGet ("Page")]
+        public async Task<List<Department>> GetPage(int pagenum, int pagesize)
+        {
+            GetDepartmentPageQuery query = new()
+            { 
+                PageNumber = pagenum,
+                PageSize = pagesize 
+            };
+            return (await _mediator.Send(query)).ToList() ;
+
+        }
+
     }
 }

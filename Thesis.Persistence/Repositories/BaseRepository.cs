@@ -35,6 +35,10 @@ namespace Thesis.Persistence.Repositories
             await _context.SaveChangesAsync();
         }
 
+        public IQueryable<T> GetQuery()
+        {
+            return  _dbset.AsQueryable<T>();
+        }
         public async Task<IEnumerable<T>> GetAllAsync()
         {
             return await _dbset.ToListAsync();

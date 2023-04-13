@@ -1,7 +1,9 @@
 ﻿using Application.Commands.AddDepartmentCommands;
+using Application.Queries.GetDepartment;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Thesis.Domain.Entities.Models;
 
 namespace Thesis.Controllers
 {
@@ -20,6 +22,13 @@ namespace Thesis.Controllers
         public async Task Create(CreateDepartmentCommand command)
         {
             await _mediator.Send(command);
+        }
+
+        [HttpGet]
+        public async Task<List<Department>> GetAll()
+        {
+            GetAllDepartamentsQuery query = new GetAllDepartamentsQuery();
+           return (await _mediator.Send(query)).ToList();
         }
     }
 }

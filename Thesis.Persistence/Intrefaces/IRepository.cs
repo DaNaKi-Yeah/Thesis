@@ -11,7 +11,7 @@ namespace Thesis.Persistence.Intrefaces
         where T : BaseEntity<TKey>
     {
         public Task<TKey> CreateAsync(T entity) ;
-        public Task<List<T>> GetAllAsync();
+        public Task<IEnumerable<T>> GetAllAsync();
         public Task<T?> GetByIdAsync(TKey id);
         public Task UpdateAsync(T entity);
         public Task DeleteAsync(T entity);

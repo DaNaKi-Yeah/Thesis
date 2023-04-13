@@ -1,18 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Thesis.Domain.Entities.Common;
-using Thesis.Persistence;
 using Thesis.Persistence.Intrefaces;
 
 namespace Thesis.Persistence.Repositories
 {
-    public class BaseRepository<TKey,T> : IRepository<TKey,T>
+    public class BaseRepository<TKey, T> : IRepository<TKey, T>
         where T : BaseEntity<TKey>
     {
         private readonly ThesisDbContext _context;
@@ -43,7 +35,7 @@ namespace Thesis.Persistence.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<List<T>> GetAllAsync()
+        public async Task<IEnumerable<T>> GetAllAsync()
         {
             return await _dbset.ToListAsync();
         }
